@@ -8,7 +8,7 @@ from django.shortcuts import get_object_or_404, redirect
 from django.template.exceptions import TemplateDoesNotExist
 from django.template.loader import get_template
 from django.views.generic import UpdateView, TemplateView, DeleteView
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.core.signing import BadSignature
 from django.core.paginator import Paginator
@@ -150,7 +150,7 @@ def bb_list(request):
     return render(request, 'main/bb_list.html', context)
 
 
-def detail(request, rubric_pk, pk):
+def bb_detail(request, rubric_pk, pk):
     bb = get_object_or_404(Bb, pk=pk)
     ais = bb.additionalimage_set.all()
     comments = Comment.objects.filter(bb=pk, is_active=True)
@@ -219,7 +219,7 @@ def profile_bb_detail(request, pk):
 
 @login_required
 def profile_bb_change(request, pk):
-    bb = get_object_or_404(Bb, pk=pk)
+    bb = get_object_or_404(Bb, pk=pk, author=request.user)
     if request.method == 'POST':
         form = BbForm(request.POST, request.FILES, instance=bb)
         if form.is_valid():
@@ -235,13 +235,14 @@ def profile_bb_change(request, pk):
         context = {
             'form': form,
             'formset': formset,
+            'bb': bb,
         }
         return render(request, 'main/profile_bb_change.html', context)
 
 
 @login_required
 def profile_bb_delete(request, pk):
-    bb = get_object_or_404(Bb, pk=pk)
+    bb = get_object_or_404(Bb, pk=pk, author=request.user)
     if request.method == 'POST':
         bb.delete()
         messages.add_message(request, messages.SUCCESS, 'Объявление удалено')

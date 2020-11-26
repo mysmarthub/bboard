@@ -23,7 +23,7 @@ urlpatterns = [
     path('accounts/logout/', views.MainLogoutView.as_view(), name='logout'),
     path('accounts/login/', views.MainLoginView.as_view(), name='login'),
     path('bbs/', views.bb_list, name='bb_list'),
-    path('<int:rubric_pk>/<int:pk>/', views.detail, name='bb_detail'),
+    path('<int:rubric_pk>/<int:pk>/', views.bb_detail, name='bb_detail'),
     path('<int:pk>/', views.by_rubric, name='by_rubric'),
     path('', views.index, name='index'),
 ]
