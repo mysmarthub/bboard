@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load bb_tags %}
+{% block title %}Список объявлений{% endblock %}
+{% block content %}
+    <h4>Все объявления <sup>{% total_bb %}</sup></h4>
+    <hr>
+    {% for bb in bbs %}
+            <div style="margin-bottom: 20px; box-shadow: 3px 3px 15px black" class="card">
+  <div class="card-body">
+    <h4 class="card-title"><a href="{{ bb.get_absolute_url }}">{{ bb.title }}</a></h4>
+      <hr>
+  {% if bb.image %}
+    <img style="width: 150px" src="{{ bb.image.url }}" alt="">
+        {% else %}
+        <p>Пользователь не добавил изображений</p>
+    {% endif %}
+      <p class="card-link"><span style="color: orangered;
+            font-style: italic; font-size: 11px;">
+                {{ bb.created_at|date:"d.m.Y H:i:s" }}</span></p>
+    <p style="font-style: italic" class="card-text">{{ bb.content|truncatewords:10 }}</p>
+      <hr>
+      {% if bb.price %}
+      <p class="card-link">Цена {{ bb.price }} руб</p>
+      {% else %}
+      <p class="card-link">Цена 0 руб</p>
+      {% endif %}
+      <hr>
+      <a style="box-shadow: 3px 3px 5px black" href="{{ bb.get_absolute_url }}" type="button" class="btn btn-primary">Подробнее</a>
+  </div>
+</div>
+        {% endfor %}
+{% endblock %}

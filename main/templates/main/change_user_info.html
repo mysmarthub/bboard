@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block title %}Правка личных данных{% endblock %}
+{% block content %}
+    <h2>Правка личных данных пользователя {{ user.username }}</h2>
+    <form method="post">
+        {% csrf_token %}
+        {% bootstrap_form form layout='horizontal' %}
+        {% buttons submit='Сохранить' %}{% endbuttons %}
+    </form>
+    <hr>
+    <p><a href="{% url 'main:password_change' %}">Изменить пароль</a></p>
+    <hr>
+    <p><a style="color: darkred" href="{% url 'main:profile_delete' %}">Удалить аккаунт</a></p>
+{% endblock %}

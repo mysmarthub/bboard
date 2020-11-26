@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% load bootstrap4 %}
+
+{% block title %}Добавление объявления - Профиль пользователя{% endblock %}
+
+{% block content %}
+<h2>Добавление объявления</h2>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% bootstrap_form form layout='horizontal' %}
+    {% bootstrap_formset formset layout='horizontal' %}
+    {% buttons submit='Добавить' %}{% endbuttons %}
+</form>
+{% endblock %}

@@ -1,0 +1,79 @@
+{% load bootstrap4 %}
+{% load bb_tags %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>{% block title %}{% endblock %} - Доска объявлений</title>
+{% bootstrap_css %}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'main/style.css' %}">
+{% bootstrap_javascript jquery='slim' %}
+</head>
+<body>
+
+<nav style="box-shadow: 0 0 5px royalblue" class="navbar navbar-expand-md bg-dark navbar-dark">
+  <!-- Brand -->
+  <a class="navbar-brand" href="{% url 'main:index' %}">Доска объявлений <sup style="color:red">{% total_bb %}</sup></a>
+
+  <!-- Toggler/collapsibe Button -->
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <!-- Navbar links -->
+  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+    <ul class="navbar-nav ml-auto">
+        {% if user.is_authenticated %}
+            <li class="nav-item">
+        <a class="nav-link" href="{% url 'main:profile_bb_add' %}">Добавить объявление <sup>free</sup></a>
+      </li>
+        <!-- Dropdown -->
+    <li class="nav-item dropdown">
+      <a style="color: orangered" class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+        {{ user.username }}
+      </a>
+      <div class="dropdown-menu dropdown-menu-right">
+        <a class="dropdown-item" href="{% url 'main:profile' %}">Мои объявления <sup style="color:red">{% total_user_bb user=user %}</sup></a>
+        <a class="dropdown-item" href="{% url 'main:profile_change' %}">Настройки</a>
+        <a class="dropdown-item" href="{% url 'main:logout' %}">Выход</a>
+      </div>
+    </li>
+        {% else %}
+            <li class="nav-item">
+        <a style="color: orangered" class="nav-link" href="{% url 'main:login' %}">Вход/Регистрация</a>
+      </li>
+        {% endif %}
+
+    </ul>
+  </div>
+</nav>
+
+<div class="container-fluid" style="margin-top:30px">
+  <div class="row">
+    <div style="border-right: 1px solid dodgerblue;" class="col-sm-3">
+        <h4 style="text-align: center">Рубрики</h4>
+        <hr>
+    {% for rubric in rubrics %}
+                {% ifchanged rubric.super_rubric.pk %}
+                    <span class="nav-link root font-weight-bold">
+                        {{ rubric.super_rubric.name }}
+                    </span>
+                {% endifchanged %}
+                <a href="{% url 'main:by_rubric' pk=rubric.pk %}" style="box-shadow: 3px 3px 5px black"
+               type="button" class="btn btn-primary btn-block">{{ rubric.name }} {% total_bb_rubric rubric %}</a>
+            {% endfor %}
+    <hr>
+    <a style="width: 100%" class="btn btn-primary" href="{% url 'main:bb_list' %}">Все объявления</a>
+    </div>
+    <div class="col-sm-9">
+        {% bootstrap_messages %}
+        {% block content %}
+        {% endblock %}
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

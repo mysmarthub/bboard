@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% load thumbnail %}
+{% block title %}{{ bb.title }}{% endblock %}
+{% block content %}
+
+    <div class="card-body">
+    <h4>Объявление пользователя {{ user.username }}</h4>
+    <hr>
+    <h4 class="card-title">{{ bb.title }}
+        <sup style="font-style: italic; color: royalblue">
+            <a href="{% url 'main:by_rubric' bb.rubric.pk %}">Рубрика {{ bb.rubric }}</a>
+        </sup>
+    </h4>
+    {% if bb.image %}
+    <img style="width: 150px" class="mr-3" src="{% thumbnail bb.image 'default' %}" alt="">
+        {% else %}
+        <p>Пользователь не добавил изображений</p>
+    {% endif %}
+    {% if ais %}
+    {% for ai in ais %}
+        <img style="width: 150px" class="mr-3" src="{% thumbnail ai.image 'default' %}" alt="">
+    {% endfor %}
+{% endif %}
+    <hr>
+      <p class="card-link"><span style="color: orangered;
+            font-style: italic; font-size: 11px;">
+                {{ bb.created_at|date:"d.m.Y H:i:s" }}</span></p>
+    <p style="font-style: italic" class="card-text">{{ bb.content }}</p>
+      <hr>
+      {% if bb.price %}
+      <p style="text-align: right" class="card-link">Цена {{ bb.price }} руб</p>
+      {% else %}
+      <p class="card-link">Цена 0 руб</p>
+      {% endif %}
+    <hr>
+    <p><a href="{% url 'main:by_rubric' pk=bb.rubric.pk %}{{ all }}">Назад</a></p>
+    <hr>
+    <h4>Комментарии к объявлению</h4>
+        <hr>
+        {% if comments %}
+<div class="mt-5">
+    {% for comment in comments %}
+    <div class="my-2 p-2 border">
+        <h5>Комменатрий от: <span style="color: orangered; font-style: italic">{{ comment.author }}</span></h5>
+        <hr>
+        <p>{{ comment.content }}</p>
+        <p class="text-right font-italic">{{ comment.created_at }}</p>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+    <hr>
+    <h4>Добавить комментарий</h4>
+        <hr>
+        <form method="post">
+    {% csrf_token %}
+    {% bootstrap_form form layout='horizontal' %}
+    {% buttons submit='Добавить' %}{% endbuttons %}
+</form>
+    <hr>
+  </div>
+{% endblock %}

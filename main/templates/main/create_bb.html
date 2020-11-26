@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load crispy_forms_filters %}
+{% block title %}Новое объявление{% endblock %}
+{% block content %}
+
+    <div class="card-body">
+        <h4 class="card-title">Создать объявление</h4>
+        <hr>
+        <form action="" method="post">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <input class="btn btn-primary" type="submit" value="Создать">
+        </form>
+  </div>
+{% endblock %}

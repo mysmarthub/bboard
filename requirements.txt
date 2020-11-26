@@ -1,0 +1,10 @@
+django
+django-crispy
+django-bootstrap4
+easy-thumbnails
+django-cleanup
+django-simple-captcha
+djangorestframework
+django-cors-headers
+pillow
+httpie

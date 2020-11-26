@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load bb_tags %}
+{% load static %}
+{% load thumbnail %}
+
+{% block title %}Профиль пользователя{% endblock %}
+
+{% block content %}
+<h2>Профиль пользователя {{ user.username }}</h2>
+{% if user.first_name and user.last_name %}
+<p>Здравствуйте, {{ user.first_name }} {{ user.last_name }}!</p>
+{% else %}
+<p>Здравствуйте!</p>
+{% endif %}
+    <hr>
+    {% if bbs %}
+<h3><a href="{% url 'main:profile_bb_add' %}">Создать новое </a><sup>
+    <span class="badge badge-primary">{% total_user_bb user %}</span></sup></h3>
+    <hr>
+    {% for bb in bbs %}
+            <div style="margin-bottom: 20px; box-shadow: 3px 3px 15px black" class="card">
+  <div class="card-body">
+    <h4 class="card-title">{{ bb.title }}</h4>
+      <hr>
+  {% if bb.image %}
+    <img style="width: 150px" src="{{ bb.image.url }}" alt="">
+        {% else %}
+        <p>Пользователь не добавил изображений</p>
+    {% endif %}
+      <p class="card-link"><span style="color: orangered;
+            font-style: italic; font-size: 11px;">
+                {{ bb.created_at|date:"d.m.Y H:i:s" }}</span></p>
+    <p style="font-style: italic" class="card-text">{{ bb.content|truncatewords:10 }}</p>
+      <hr>
+      {% if bb.price %}
+      <p class="card-link">Цена {{ bb.price }} руб</p>
+      {% else %}
+      <p class="card-link">Цена 0 руб</p>
+      {% endif %}
+      <hr>
+  <p style="font-style: italic">Комментариев <sup style="color: red">{{ bb.comment_set.count }}</sup></p>
+      <hr>
+  <a href="{% url 'main:profile_bb_change' pk=bb.pk%}">Исправить</a>
+      <hr>
+      <a href="{% url 'main:profile_bb_delete' pk=bb.pk%}">Удалить</a>
+  </div>
+</div>
+        {% endfor %}
+{% endif %}
+{% endblock %}

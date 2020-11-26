@@ -1,0 +1,9 @@
+<ol>
+        {% for bb in bbs  %}
+            <li><a href="#">{{ bb.title }}</a>
+            <sup><span style="color: orangered;
+            font-style: italic; font-size: 11px;">
+                {{ bb.published|date:"d.m.Y H:i:s" }}</span></sup>
+            </li>
+        {% endfor %}
+    </ol>
