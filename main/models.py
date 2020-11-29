@@ -44,6 +44,9 @@ class Rubric(models.Model):
     super_rubric = models.ForeignKey('SuperRubric', on_delete=models.PROTECT,
                                      null=True, blank=True, verbose_name='Надрубрика')
 
+    def __str__(self):
+        return self.name
+
 
 class SuperRubricManager(models.Manager):
     def get_queryset(self):
@@ -53,14 +56,14 @@ class SuperRubricManager(models.Manager):
 class SuperRubric(Rubric):
     objects = SuperRubricManager()
 
-    def __str__(self):
-        return self.name
-
     class Meta:
         proxy = True
         ordering = ('order', 'name', )
         verbose_name = 'Надрубрика'
         verbose_name_plural = 'Надрубрики'
+
+    def __str__(self):
+        return self.name
 
 
 class SubRubricManager(models.Manager):

@@ -5,38 +5,31 @@
 {% block content %}
 
     <div class="card-body">
-    <h4>Объявление пользователя {{ user.username }}</h4>
-    <hr>
-    <h4 class="card-title">{{ bb.title }}
-        <sup style="font-style: italic; color: royalblue">
+    <h4>Объявление пользователя <span style="color: orangered; font-style: italic">{{ bb.author.first_name }}</span> <sup style="font-style: italic; color: royalblue">
             <a href="{% url 'main:by_rubric' bb.rubric.pk %}">Рубрика {{ bb.rubric }}</a>
-        </sup>
-    </h4>
+        </sup></h4>
+    <hr>
+    <h4 style="text-align: center" class="card-title">{{ bb.title }} <sup><span style="color: orangered;
+            font-style: italic; font-size: 11px;">
+                Дата публикации: {{ bb.created_at|date:"d.m.Y H:i:s" }}</span></sup></h4>
     {% if bb.image %}
     <img style="width: 150px" class="mr-3" src="{% thumbnail bb.image 'default' %}" alt="">
-        {% else %}
-        <p>Пользователь не добавил изображений</p>
     {% endif %}
     {% if ais %}
     {% for ai in ais %}
         <img style="width: 150px" class="mr-3" src="{% thumbnail ai.image 'default' %}" alt="">
     {% endfor %}
 {% endif %}
-    <hr>
-      <p class="card-link"><span style="color: orangered;
-            font-style: italic; font-size: 11px;">
-                {{ bb.created_at|date:"d.m.Y H:i:s" }}</span></p>
     <p style="font-style: italic" class="card-text">{{ bb.content }}</p>
-      <hr>
       {% if bb.price %}
-      <p style="text-align: right" class="card-link">Цена {{ bb.price }} руб</p>
+      <p class="card-link">Цена {{ bb.price }} руб</p>
       {% else %}
       <p class="card-link">Цена 0 руб</p>
       {% endif %}
     <hr>
     <p><a href="{% url 'main:by_rubric' pk=bb.rubric.pk %}{{ all }}">Назад</a></p>
     <hr>
-    <h4>Комментарии к объявлению</h4>
+    <h6>Комментарии к объявлению:</h6>
         <hr>
         {% if comments %}
 <div class="mt-5">
@@ -49,9 +42,11 @@
     </div>
     {% endfor %}
 </div>
+            {% else %}
+            <p>Нет комментариев...</p>
 {% endif %}
     <hr>
-    <h4>Добавить комментарий</h4>
+    <h6 style="text-align: center">Добавить комментарий</h6>
         <hr>
         <form method="post">
     {% csrf_token %}

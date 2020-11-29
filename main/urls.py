@@ -5,8 +5,8 @@ from . import views
 
 app_name = 'main'
 urlpatterns = [
-    path('password_reset/', views.MainPasswordResetView.as_view(), name='password_reset'),
     path('password_reset/done/', auth_views.PasswordResetDoneView.as_view(), name='password_reset_done'),
+    path('password_reset/', views.MainPasswordResetView.as_view(), name='password_reset'),
     path('reset/<uidb64>/<token>/', views.MainPasswordResetConfirmView.as_view(), name='password_reset_confirm'),
     path('reset/done/', auth_views.PasswordResetCompleteView.as_view(), name='password_reset_complete'),
     path('accounts/register/activate/<str:sign>/', views.user_activate, name='register_activate'),
