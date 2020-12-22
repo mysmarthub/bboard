@@ -65,7 +65,7 @@ class ChangeUserInfoView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
     template_name = 'main/change_user_info.html'
     form_class = ChangeUserInfoForm
     success_url = reverse_lazy('main:profile')
-    success_message = 'Личные данные пользователя успешно изменены'
+    success_message = 'User\'s personal data has been successfully changed'
 
     def dispatch(self, request, *args, **kwargs):
         self.user_id = request.user.pk
@@ -119,7 +119,7 @@ def profile_bb_add(request):
 class MainPasswordChangeView(SuccessMessageMixin, LoginRequiredMixin, PasswordChangeView):
     template_name = 'main/password_change.html'
     success_url = reverse_lazy('main:profile')
-    success_message = 'Пароль пользователя успешно изменён'
+    success_message = 'The user\'s password has been successfully changed'
 
 
 class DeleteUserView(LoginRequiredMixin, DeleteView):
@@ -133,7 +133,7 @@ class DeleteUserView(LoginRequiredMixin, DeleteView):
 
     def post(self, request, *args, **kwargs):
         logout(request)
-        messages.add_message(request, messages.SUCCESS, 'Пользователь удалён')
+        messages.add_message(request, messages.SUCCESS, 'The user is deleted')
         return super().post(request, *args, **kwargs)
 
     def get_object(self, queryset=None):
@@ -166,11 +166,11 @@ def bb_detail(request, rubric_pk, pk):
         if c_form.is_valid():
             c_form.save()
             messages.add_message(request, messages.SUCCESS,
-                                 'Комментарий добавлен')
+                                 'Comment added')
         else:
             form = c_form
             messages.add_message(request, messages.WARNING,
-                                 'Комментарий не добавлен')
+                                 'The comment is not added')
     context = {
         'bb': bb,
         'ais': ais,
@@ -227,7 +227,7 @@ def profile_bb_change(request, pk):
             formset = AIFormSet(request.POST, request.FILES, instance=bb)
             if formset.is_valid():
                 formset.save()
-                messages.add_message(request, messages.SUCCESS, 'Объявление исправлено')
+                messages.add_message(request, messages.SUCCESS, 'Ad fixed')
                 return redirect('main:profile')
     else:
         form = BbForm(instance=bb)
@@ -245,7 +245,7 @@ def profile_bb_delete(request, pk):
     bb = get_object_or_404(Bb, pk=pk, author=request.user)
     if request.method == 'POST':
         bb.delete()
-        messages.add_message(request, messages.SUCCESS, 'Объявление удалено')
+        messages.add_message(request, messages.SUCCESS, 'Ad removed')
         return redirect('main:profile')
     else:
         context = {

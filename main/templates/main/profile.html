@@ -3,18 +3,18 @@
 {% load static %}
 {% load thumbnail %}
 
-{% block title %}Профиль пользователя{% endblock %}
+{% block title %}User profile{% endblock %}
 
 {% block content %}
-<h2>Профиль пользователя {{ user.username }}</h2>
+<h2>User profile {{ user.username }}</h2>
 {% if user.first_name and user.last_name %}
-<p>Здравствуйте, {{ user.first_name }} {{ user.last_name }}!</p>
+<p>Hello, {{ user.first_name }} {{ user.last_name }}!</p>
 {% else %}
-<p>Здравствуйте!</p>
+<p>Hello!</p>
 {% endif %}
     <hr>
     {% if bbs %}
-<h3><a href="{% url 'main:profile_bb_add' %}">Создать новое </a><sup>
+<h3><a href="{% url 'main:profile_bb_add' %}">Create a new one ad </a><sup>
     <span class="badge badge-primary">{% total_user_bb user %}</span></sup></h3>
     <hr>
     {% for bb in bbs %}
@@ -25,7 +25,7 @@
   {% if bb.image %}
     <img style="width: 150px" src="{{ bb.image.url }}" alt="">
         {% else %}
-        <p>Пользователь не добавил изображений</p>
+        <p>The user did not add any images</p>
     {% endif %}
       <p class="card-link"><span style="color: orangered;
             font-style: italic; font-size: 11px;">
@@ -33,16 +33,16 @@
     <p style="font-style: italic" class="card-text">{{ bb.content|truncatewords:10 }}</p>
       <hr>
       {% if bb.price %}
-      <p class="card-link">Цена {{ bb.price }} руб</p>
+      <p class="card-link">Price {{ bb.price }} rub</p>
       {% else %}
-      <p class="card-link">Цена 0 руб</p>
+      <p class="card-link">Price 0 rub</p>
       {% endif %}
       <hr>
-  <p style="font-style: italic">Комментариев <sup style="color: red">{{ bb.comment_set.count }}</sup></p>
+  <p style="font-style: italic">Comments <sup style="color: red">{{ bb.comment_set.count }}</sup></p>
       <hr>
-  <a href="{% url 'main:profile_bb_change' pk=bb.pk%}">Исправить</a>
+  <a href="{% url 'main:profile_bb_change' pk=bb.pk%}">Edit</a>
       <hr>
-      <a href="{% url 'main:profile_bb_delete' pk=bb.pk%}">Удалить</a>
+      <a href="{% url 'main:profile_bb_delete' pk=bb.pk%}">Delete</a>
   </div>
 </div>
         {% endfor %}

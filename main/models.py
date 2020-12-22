@@ -10,9 +10,9 @@ from .utilities import send_activation_notification, get_timestamp_path, send_ne
 class AdvUser(AbstractUser):
     is_activated = models.BooleanField(default=True,
                                        db_index=True,
-                                       verbose_name='прошёл активацию?')
+                                       verbose_name='passed activation?')
     send_messages = models.BooleanField(default=True,
-                                        verbose_name='Отправлять оповещение о новых комментариях?')
+                                        verbose_name='Send notification of new comments?')
 
     class Meta(AbstractUser.Meta):
         pass
@@ -40,9 +40,9 @@ class Rubric(models.Model):
         unique=True,
         verbose_name='Название',
     )
-    order = models.SmallIntegerField(default=0, db_index=True, verbose_name='Порядок')
+    order = models.SmallIntegerField(default=0, db_index=True, verbose_name='Order')
     super_rubric = models.ForeignKey('SuperRubric', on_delete=models.PROTECT,
-                                     null=True, blank=True, verbose_name='Надрубрика')
+                                     null=True, blank=True, verbose_name='Above category')
 
     def __str__(self):
         return self.name
@@ -59,8 +59,8 @@ class SuperRubric(Rubric):
     class Meta:
         proxy = True
         ordering = ('order', 'name', )
-        verbose_name = 'Надрубрика'
-        verbose_name_plural = 'Надрубрики'
+        verbose_name = 'Above category'
+        verbose_name_plural = 'Above categories'
 
     def __str__(self):
         return self.name
@@ -80,20 +80,24 @@ class SubRubric(Rubric):
     class Meta:
         proxy = True
         ordering = ('super_rubric__order', 'super_rubric__name', 'order', 'name')
-        verbose_name = 'Подрубрика'
-        verbose_name_plural = 'Подрубрики'
+        verbose_name = 'Subheading'
+        verbose_name_plural = 'Subheadings'
 
 
 class Bb(models.Model):
-    rubric = models.ForeignKey(SubRubric, null=True, on_delete=models.PROTECT, verbose_name='рубрика', related_name='bbs')
-    title = models.CharField(max_length=40, verbose_name='товар', )
-    content = models.TextField(verbose_name='описание')
-    price = models.FloatField(default=0, verbose_name='цена', )
-    contacts = models.TextField(verbose_name='Контакты')
-    image = models.ImageField(blank=True, upload_to=get_timestamp_path, verbose_name='изображение')
-    author = models.ForeignKey(AdvUser, on_delete=models.CASCADE, verbose_name='автор объявления')
-    is_active = models.BooleanField(default=True, db_index=True, verbose_name='выводить в списке?')
-    created_at = models.DateTimeField(auto_now_add=True, db_index=True, verbose_name='опубликовано')
+    rubric = models.ForeignKey(SubRubric,
+                               null=True,
+                               on_delete=models.PROTECT,
+                               verbose_name='category',
+                               related_name='bbs')
+    title = models.CharField(max_length=40, verbose_name='product', )
+    content = models.TextField(verbose_name='description')
+    price = models.FloatField(default=0, verbose_name='price', )
+    contacts = models.TextField(verbose_name='Contacts')
+    image = models.ImageField(blank=True, upload_to=get_timestamp_path, verbose_name='picture')
+    author = models.ForeignKey(AdvUser, on_delete=models.CASCADE, verbose_name='the author of the ad')
+    is_active = models.BooleanField(default=True, db_index=True, verbose_name='display in the list?')
+    created_at = models.DateTimeField(auto_now_add=True, db_index=True, verbose_name='published by')
 
     def delete(self, *args, **kwargs):
         for ai in self.additionalimage_set.all():
@@ -101,8 +105,8 @@ class Bb(models.Model):
         super().delete(*args, **kwargs)
 
     class Meta:
-        verbose_name = 'объявление'
-        verbose_name_plural = 'объявления'
+        verbose_name = 'ad'
+        verbose_name_plural = 'ads'
         ordering = ['-created_at', ]
 
     def __str__(self):
@@ -113,24 +117,24 @@ class Bb(models.Model):
 
 
 class AdditionalImage(models.Model):
-    bb = models.ForeignKey(Bb, on_delete=models.CASCADE, verbose_name='объявление')
-    image = models.ImageField(upload_to=get_timestamp_path, verbose_name='изображение')
+    bb = models.ForeignKey(Bb, on_delete=models.CASCADE, verbose_name='ad')
+    image = models.ImageField(upload_to=get_timestamp_path, verbose_name='picture')
 
     class Meta:
-        verbose_name = 'дополнительная иллюстрация'
-        verbose_name_plural = 'дополнительные иллюстрации'
+        verbose_name = 'additional illustration'
+        verbose_name_plural = 'additional illustrations'
 
 
 class Comment(models.Model):
-    bb = models.ForeignKey(Bb, on_delete=models.CASCADE, verbose_name='объявление')
-    author = models.CharField(max_length=30, verbose_name='автор')
-    content = models.TextField(verbose_name='содержание')
-    is_active = models.BooleanField(default=True, db_index=True, verbose_name='Выводить на экран?')
-    created_at = models.DateTimeField(auto_now_add=True, db_index=True, verbose_name='опубликован')
+    bb = models.ForeignKey(Bb, on_delete=models.CASCADE, verbose_name='ad')
+    author = models.CharField(max_length=30, verbose_name='author')
+    content = models.TextField(verbose_name='the contents')
+    is_active = models.BooleanField(default=True, db_index=True, verbose_name='Output to the screen?')
+    created_at = models.DateTimeField(auto_now_add=True, db_index=True, verbose_name='published')
 
     class Meta:
-        verbose_name_plural = 'комментарии'
-        verbose_name = 'комментарий'
+        verbose_name_plural = 'comments'
+        verbose_name = 'comment'
         ordering = ['created_at']
 
 

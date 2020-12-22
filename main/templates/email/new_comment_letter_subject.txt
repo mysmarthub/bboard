@@ -1,1 +1,1 @@
-Новый комментарий оставлен под объявлением пользователя {{ author.username }}
+A new comment was left under the user's ad {{ author.username }}

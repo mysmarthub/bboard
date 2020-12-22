@@ -1,11 +1,11 @@
-Уважаемый пользователь {{ user.username }}!
+Dear user {{ user.username }}!
 
-Вы зарегистрировались на сайте "Доска объявлений".
-Вам необходимо выполнить активацию, дабы подтвердить свою личность.
-Для этого пройдите, пожалуйста, по ссылке
+You have registered on the website "Bulletin Board".
+You need to perform activation in order to confirm your identity.
+To do this, please follow the link
 
 {{ host }}{% url 'main:register_activate' sign=sign %}
 
-До свидания!
+Goodbye!
 
-С уважением, администрация сайта "Доска объявлений".
+Sincerely, the administration of the site "Bulletin Board".

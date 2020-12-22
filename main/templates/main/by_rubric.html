@@ -3,9 +3,9 @@
 {% load static %}
 {% load bootstrap4 %}
 {% load bb_tags %}
-{% block title %}Объявления в разделе {{ rubric }}{% endblock %}
+{% block title %}Ads in the section {{ rubric }}{% endblock %}
 {% block content %}
-        <h4>Объявления в разделе <span style="font-style: italic;">"{{ rubric }}"</span></h4>
+        <h4>Ads in the section <span style="font-style: italic;">"{{ rubric }}"</span></h4>
     <hr>
         <form style="width: 100%">
             {% bootstrap_form form show_label=False %}
@@ -21,7 +21,7 @@
   {% if bb.image %}
     <img style="width: 150px" class="mr-3" src="{% thumbnail bb.image 'default' %}" alt="">
         {% else %}
-        <p>Пользователь не добавил изображений</p>
+        <p>The user did not add any images</p>
     {% endif %}
       <p class="card-link"><span style="color: orangered;
             font-style: italic; font-size: 11px;">
@@ -29,12 +29,12 @@
     <p style="font-style: italic" class="card-text">{{ bb.content|truncatewords:10 }}</p>
       <hr>
       {% if bb.price %}
-      <p class="card-link">Цена {{ bb.price }} руб</p>
+      <p class="card-link">Price {{ bb.price }} rub</p>
       {% else %}
-      <p class="card-link">Цена 0 руб</p>
+      <p class="card-link">Price 0 rub</p>
       {% endif %}
       <hr>
-      <a style="box-shadow: 3px 3px 5px black" href="{{ bb.get_absolute_url }}" type="button" class="btn btn-primary">Подробнее</a>
+      <a style="box-shadow: 3px 3px 5px black" href="{{ bb.get_absolute_url }}" type="button" class="btn btn-primary">More detailed</a>
   </div>
 </div>
         {% endfor %}

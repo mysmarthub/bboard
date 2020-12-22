@@ -21,14 +21,14 @@ AIFormSet = inlineformset_factory(Bb, AdditionalImage, fields='__all__')
 class RegisterUserForm(forms.ModelForm):
     email = forms.EmailField(required=True, label='Email')
     password1 = forms.CharField(
-        label='Пароль',
+        label='Password',
         widget=forms.PasswordInput,
         help_text=password_validation.password_validators_help_text_html(),
     )
     password2 = forms.CharField(
-        label='Пароль (повторно)',
+        label='Password (repeated)',
         widget=forms.PasswordInput,
-        help_text='Введите повторно ваш пароль'
+        help_text='Re-enter your password'
     )
 
     def clean_password1(self):
@@ -43,7 +43,7 @@ class RegisterUserForm(forms.ModelForm):
         password2 = self.cleaned_data['password2']
         if password1 and password2 and password1 != password2:
             errors = {'password2': ValidationError(
-                'Введенные пароли не совпадают!', code='password_mismatch'
+                'The entered passwords do not match!', code='password_mismatch'
             )}
             raise ValidationError(errors)
 
@@ -80,7 +80,7 @@ class ChangeUserInfoForm(forms.ModelForm):
 
 class SubRubricForm(forms.ModelForm):
     super_rubric = forms.ModelChoiceField(queryset=SuperRubric.objects.all(),
-                                          empty_label=None, label='Надрубрика',
+                                          empty_label=None, label='Above category',
                                           required=True)
 
     class Meta:
@@ -100,8 +100,8 @@ class UserCommentForm(forms.ModelForm):
 
 
 class GuestCommentForm(forms.ModelForm):
-    captcha = CaptchaField(label='Введите текст с картинки',
-                           error_messages={'invalid': 'Неправильный текст'})
+    captcha = CaptchaField(label='Enter text from the image',
+                           error_messages={'invalid': 'Incorrect text'})
 
     class Meta:
         model = Comment

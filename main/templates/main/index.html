@@ -2,11 +2,11 @@
 {% load thumbnail %}
 {% load crispy_forms_filters %}
 {% load bb_tags %}
-{% block title %}Главная{% endblock %}
+{% block title %}Main{% endblock %}
 {% block content %}
     <div style="text-align: center; color: dodgerblue">
-        <h1>Доска объявлений</h1>
-      <p>Добро пожаловать на сайт бесплатной доски объявлений</p>
+        <h1>Bulletin board</h1>
+      <p>Welcome to the free Bulletin Board website</p>
     <hr>
     </div>
 
@@ -18,7 +18,7 @@
   {% if bb.image %}
     <img style="width: 150px" class="mr-3" src="{% thumbnail bb.image 'default' %}" alt="">
         {% else %}
-        <p>Пользователь не добавил изображений</p>
+        <p>The user did not add any images</p>
     {% endif %}
       <p class="card-link"><span style="color: orangered;
             font-style: italic; font-size: 11px;">
@@ -26,12 +26,12 @@
     <p style="font-style: italic" class="card-text">{{ bb.content|truncatewords:10 }}</p>
       <hr>
       {% if bb.price %}
-      <p class="card-link">Цена {{ bb.price }} руб</p>
+      <p class="card-link">Price {{ bb.price }} rub</p>
       {% else %}
-      <p class="card-link">Цена 0 руб</p>
+      <p class="card-link">Price 0 rub</p>
       {% endif %}
       <hr>
-      <a style="box-shadow: 3px 3px 5px black" href="{{ bb.get_absolute_url }}" type="button" class="btn btn-primary">Подробнее</a>
+      <a style="box-shadow: 3px 3px 5px black" href="{{ bb.get_absolute_url }}" type="button" class="btn btn-primary">More detailed</a>
   </div>
 </div>
         {% endfor %}

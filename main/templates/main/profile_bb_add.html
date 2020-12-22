@@ -2,14 +2,14 @@
 
 {% load bootstrap4 %}
 
-{% block title %}Добавление объявления - Профиль пользователя{% endblock %}
+{% block title %}Adding an ad - user Profile{% endblock %}
 
 {% block content %}
-<h2>Добавление объявления</h2>
+<h2>Adding an ad</h2>
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {% bootstrap_form form layout='horizontal' %}
     {% bootstrap_formset formset layout='horizontal' %}
-    {% buttons submit='Добавить' %}{% endbuttons %}
+    {% buttons submit='Add' %}{% endbuttons %}
 </form>
 {% endblock %}

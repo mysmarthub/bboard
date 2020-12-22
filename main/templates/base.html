@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>{% block title %}{% endblock %} - Доска объявлений</title>
+  <title>{% block title %}{% endblock %} - Bulletin Board</title>
 {% bootstrap_css %}
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,7 +15,7 @@
 
 <nav style="box-shadow: 0 0 5px royalblue" class="navbar navbar-expand-md bg-dark navbar-dark">
   <!-- Brand -->
-  <a class="navbar-brand" href="{% url 'main:index' %}">Доска объявлений <sup style="color:red">{% total_bb %}</sup></a>
+  <a class="navbar-brand" href="{% url 'main:index' %}">Bulletin Board <sup style="color:red">{% total_bb %}</sup></a>
 
   <!-- Toggler/collapsibe Button -->
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
@@ -27,7 +27,7 @@
     <ul class="navbar-nav ml-auto">
         {% if user.is_authenticated %}
             <li class="nav-item">
-        <a class="nav-link" href="{% url 'main:profile_bb_add' %}">Добавить объявление <sup>free</sup></a>
+        <a class="nav-link" href="{% url 'main:profile_bb_add' %}">Add an ad <sup>free</sup></a>
       </li>
         <!-- Dropdown -->
     <li class="nav-item dropdown">
@@ -35,14 +35,14 @@
         {{ user.username }}
       </a>
       <div class="dropdown-menu dropdown-menu-right">
-        <a class="dropdown-item" href="{% url 'main:profile' %}">Мои объявления <sup style="color:red">{% total_user_bb user=user %}</sup></a>
-        <a class="dropdown-item" href="{% url 'main:profile_change' %}">Настройки</a>
+        <a class="dropdown-item" href="{% url 'main:profile' %}">My ads <sup style="color:red">{% total_user_bb user=user %}</sup></a>
+        <a class="dropdown-item" href="{% url 'main:profile_change' %}">Settings</a>
         <a class="dropdown-item" href="{% url 'main:logout' %}">Выход</a>
       </div>
     </li>
         {% else %}
             <li class="nav-item">
-        <a style="color: orangered" class="nav-link" href="{% url 'main:login' %}">Вход/Регистрация</a>
+        <a style="color: orangered" class="nav-link" href="{% url 'main:login' %}">Login/Registration</a>
       </li>
         {% endif %}
 
@@ -53,7 +53,7 @@
 <div class="container-fluid" style="margin-top:30px">
   <div class="row">
     <div style="border-right: 1px solid dodgerblue;" class="col-sm-3">
-        <h4 style="text-align: center">Рубрики</h4>
+        <h4 style="text-align: center">Categories</h4>
         <hr>
     {% for rubric in rubrics %}
                 {% ifchanged rubric.super_rubric.pk %}
@@ -65,7 +65,7 @@
                type="button" class="btn btn-primary btn-block">{{ rubric.name }} {% total_bb_rubric rubric %}</a>
             {% endfor %}
     <hr>
-    <a style="width: 100%" class="btn btn-primary" href="{% url 'main:bb_list' %}">Все объявления</a>
+    <a style="width: 100%" class="btn btn-primary" href="{% url 'main:bb_list' %}">All ads</a>
     </div>
     <div class="col-sm-9">
         {% bootstrap_messages %}

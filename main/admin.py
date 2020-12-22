@@ -15,21 +15,21 @@ def send_activation_notifications(modeladmin, request, queryset):
     for rec in queryset:
         if not rec.is_activated:
             send_activation_notification(rec)
-    modeladmin.message_user(request, 'Письма с оповещениями отправлены')
+    modeladmin.message_user(request, 'Notification emails sent')
 
 
-send_activation_notifications.short_description = 'Отправка писем с оповещениями об активации'
+send_activation_notifications.short_description = 'Sending emails with activation notifications'
 
 
 class NonactivatedFilter(admin.SimpleListFilter):
-    title = 'Прошли активацию?'
+    title = 'Went through the activation?'
     parameter_name = 'actstate'
 
     def lookups(self, request, model_admin):
         return (
-            ('activated', 'Прошли'),
-            ('threedays', 'Не прошли более трех дней'),
-            ('week', 'Не прошли более недели'),
+            ('activated', 'Passed'),
+            ('threedays', 'Not more than three days have passed'),
+            ('week', 'Not more than a week has passed'),
         )
 
     def queryset(self, request, queryset):
@@ -66,9 +66,9 @@ class AdvUserAdmin(admin.ModelAdmin):
                 + "?"
                 + urlencode({"author__id": f"{obj.id}"})
         )
-        return format_html('<a href="{}">Объявлений: {}</a>', url, count)
+        return format_html('<a href="{}">Ads: {}</a>', url, count)
 
-    bb_link.short_description = 'Объявления'
+    bb_link.short_description = 'Ads'
 
 
 class AdditionalImageInline(admin.TabularInline):
@@ -83,7 +83,10 @@ class CommentInline(admin.TabularInline):
 
 @admin.register(Bb)
 class BbAdmin(admin.ModelAdmin):
-    list_display = ('rubric', 'title', 'content', 'author', 'price', 'created_at', 'comment_count', "view_comments_link")
+    list_display = (
+        'rubric', 'title', 'content',
+        'author', 'price', 'created_at',
+        'comment_count', "view_comments_link")
     fields = (
         ('rubric', 'author'),
         'title', 'content', 'price',
@@ -96,7 +99,7 @@ class BbAdmin(admin.ModelAdmin):
     def comment_count(self, obj):
         return obj.comment_set.count()
 
-    comment_count.short_description = 'Комментариев'
+    comment_count.short_description = 'Comments'
 
     def view_comments_link(self, obj):
         count = obj.comment_set.count()
@@ -105,9 +108,9 @@ class BbAdmin(admin.ModelAdmin):
                 + "?"
                 + urlencode({"bb__id": f"{obj .id}"})
         )
-        return format_html('<a href="{}">{} Комментариев</a>', url, count)
+        return format_html('<a href="{}">{} Comments</a>', url, count)
 
-    view_comments_link.short_description = "Комментарии"
+    view_comments_link.short_description = "Comments"
 
 
 class SubRubricInline(admin.TabularInline):
@@ -131,9 +134,9 @@ class SubRubricAdmin(admin.ModelAdmin):
                 + "?"
                 + urlencode({"rubric__id": f"{obj.id}"})
         )
-        return format_html('<a href="{}">Объявлений: {}</a>', url, count)
+        return format_html('<a href="{}">Ads: {}</a>', url, count)
 
-    bb_link.short_description = 'Объявления'
+    bb_link.short_description = 'Ads'
 
 
 admin.site.register(SuperRubric, SuperRubricAdmin)
@@ -155,9 +158,9 @@ class CommentAdmin(admin.ModelAdmin):
         url = (
                 reverse("admin:main_bb_change", args=[obj.bb.id])
         )
-        return format_html('<a href="{}">Объявление: {}</a>', url, title)
+        return format_html('<a href="{}">Ad: {}</a>', url, title)
 
-    bb_title.short_description = 'Объявление'
+    bb_title.short_description = 'Ad'
 
 
 admin.site.register(Comment, CommentAdmin)

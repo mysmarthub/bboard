@@ -1,10 +1,11 @@
 {% extends 'base.html' %}
 {% load bootstrap4 %}
-{% block title %}Удаление пользователя{% endblock %}
+{% block title %}Deleting a user{% endblock %}
 {% block content %}
-    <h2>Удаление пользователя {{ user.username }}</h2>
-    <p>Вы уверены, что хотите удалить ваш аккаунт навсегда? Вся информация будет потеряна!</p>
-    <p>После удаления восстановить аккаунт будет невозможно!</p>
+    <h2>Deleting a user {{ user.username }}</h2>
+    <p>Are you sure you want to delete your account permanently?
+        All information will be lost!</p>
+    <p>After deleting it, you will not be able to restore your account!</p>
     <form method="post">
         {% csrf_token %}
         {% buttons submit="Удалить" %}{% endbuttons %}

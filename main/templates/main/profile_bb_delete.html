@@ -2,26 +2,28 @@
 {% load crispy_forms_filters %}
 {% load thumbnail %}
 
-{% block title %}Удаление объявления - Профиль пользователя{% endblock %}
+{% block title %}Deleting an ad - user Profile{% endblock %}
 
 {% block content %}
-<h2>Удаление объявления</h2>
+<h2>Deleting an ad</h2>
 <div class="container-fluid mt-3">
     <div class="row">
         {% if bb.image %}
-        <div class="col-md-auto"><img style="width: 150px" class="mr-3" src="{% thumbnail bb.image 'default' %}" alt=""></div>
+        <div class="col-md-auto">
+            <img style="width: 150px" class="mr-3" src="{% thumbnail bb.image 'default' %}" alt="">
+        </div>
         {% endif %}
         <div class="col">
             <h2>{{ bb.title }}</h2>
             <p>{{ bb.content }}</p>
             <p class="font-weight-bold">{{ bb.price }} руб.</p>
             <p>{{ bb.contacts }}</p>
-            <p class="font-italic">Объявление добавлено {{ bb.created_at }}</p>
+            <p class="font-italic">The announcement added {{ bb.created_at }}</p>
         </div>
     </div>
 </div>
 <form method="post">
     {% csrf_token %}
-    <input class="btn btn-primary" type="submit" value="Удалить">
+    <input class="btn btn-primary" type="submit" value="Delete">
 </form>
 {% endblock %}

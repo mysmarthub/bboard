@@ -1,25 +1,27 @@
 {% extends "base.html" %}
 {% load thumbnail %}
 
-{% block title %}{{ bb.title }} - Профиль пользователя{% endblock %}
+{% block title %}{{ bb.title }} - User profile{% endblock %}
 
 {% block content %}
 <div class="container-fluid mt-3">
     <div class="row">
         {% if bb.image %}
-        <div class="col-md-auto"><img style="width: 150px" class="mr-3" src="{% thumbnail bb.image 'default' %}" alt=""></div>
+        <div class="col-md-auto">
+            <img style="width: 150px" class="mr-3" src="{% thumbnail bb.image 'default' %}" alt="">
+        </div>
         {% endif %}
         <div class="col">
             <h2>{{ bb.title }}</h2>
             <p>{{ bb.content }}</p>
-            <p class="font-weight-bold">{{ bb.price }} руб.</p>
+            <p class="font-weight-bold">{{ bb.price }} rub.</p>
             <p>{{ bb.contacts }}</p>
-            <p class="text-right font-italic">Объявление добавлено {{ bb.created_at }}</p>
+            <p class="text-right font-italic">The announcement added {{ bb.created_at }}</p>
         </div>
     </div>
 <p class="text-right mt-2">
-                <a href="{% url 'main:profile_bb_change' pk=bb.pk%}">Исправить</a>
-                <a href="{% url 'main:profile_bb_delete' pk=bb.pk%}">Удалить</a>
+                <a href="{% url 'main:profile_bb_change' pk=bb.pk%}">Edit</a>
+                <a href="{% url 'main:profile_bb_delete' pk=bb.pk%}">Delete</a>
             </p>
 </div>
 {% if ais %}
@@ -31,7 +33,7 @@
     {% endfor %}
 </div>
 {% endif %}
-<p><a href="{% url 'main:profile' %}">Назад</a></p>
+<p><a href="{% url 'main:profile' %}">Back</a></p>
 {% if comments %}
 <div class="mt-5">
     {% for comment in comments %}

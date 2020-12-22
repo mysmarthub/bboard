@@ -1,18 +1,8 @@
 from django import template
-from django.db.models import Count
 
-from ..models import Bb, SubRubric, SuperRubric, Rubric
+from ..models import Bb, SubRubric, SuperRubric
 
 register = template.Library()
-
-
-# @register.inclusion_tag('main/new_bb.html')
-# def get_new_bb(count=5):
-#     bbs = Bb.objects.order_by('-published')[:count]
-#     context = {
-#         'bbs': bbs,
-#     }
-#     return context
 
 
 @register.simple_tag

@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
-{% block title %}Ошибка при активации{% endblock %}
+{% block title %}Error when activating{% endblock %}
 
 {% block content %}
-    <h2>Ошибка активации</h2>
-    <p>Активация пользователя с таким именем завершилась неудачей!</p>
-    <p><a href="{% url 'main:register' %}">Зарегистрироваться повторно</a></p>
+    <h2>Activation error</h2>
+    <p>Activation of a user with this name failed!</p>
+    <p><a href="{% url 'main:register' %}">Register again</a></p>
 {% endblock %}

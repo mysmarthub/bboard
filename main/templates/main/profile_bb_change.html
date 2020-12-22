@@ -2,14 +2,14 @@
 
 {% load bootstrap4 %}
 
-{% block title %}Правка объявления{% endblock %}
+{% block title %}Edit an ad{% endblock %}
 
 {% block content %}
-<h2>Правка объявления {{ bb.title }}, пользователя {{ bb.author }}</h2>
+<h2>Edit an ad {{ bb.title }}, the user {{ bb.author }}</h2>
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {% bootstrap_form form layout='horizontal' %}
     {% bootstrap_formset formset layout='horizontal' %}
-    {% buttons submit='Сохранить' %}{% endbuttons %}
+    {% buttons submit='Save' %}{% endbuttons %}
 </form>
 {% endblock %}

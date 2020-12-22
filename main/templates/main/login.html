@@ -1,20 +1,19 @@
 {% extends 'base.html' %}
 {% load bootstrap4 %}
-{% block title %}Вход{% endblock %}
+{% block title %}Login{% endblock %}
 {% block content %}
-    <h2>Вход</h2>
+    <h2>Login</h2>
     {% if user.is_authenticated %}
-        <p>Вы уже выполнили вход.</p>
+        <p>You have already signed in</p>
     {% else %}
         <form method="post">
             {% csrf_token %}
-{#            {% bootstrap_form form layout='horizontal' %}#}
                 {% bootstrap_form form layout='vertical' %}
             <input type="hidden" name="next" value="{{ next }}">
-            {% buttons submit="Войти" %}{% endbuttons %}
+            {% buttons submit="Sign in" %}{% endbuttons %}
         </form>
     {% endif %}
     <hr>
-    <p><a href="{% url 'main:register' %}">Регистрация</a></p>
-    <p><a href="{% url 'main:password_reset' %}">Сбросить пароль</a></p>
+    <p><a href="{% url 'main:register' %}">Registration</a></p>
+    <p><a href="{% url 'main:password_reset' %}">Password reset</a></p>
 {% endblock %}

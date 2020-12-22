@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
 {% load bb_tags %}
-{% block title %}Список объявлений{% endblock %}
+{% block title %}List of ads{% endblock %}
 {% block content %}
-    <h4>Все объявления <sup>{% total_bb %}</sup></h4>
+    <h4>All ads <sup>{% total_bb %}</sup></h4>
     <hr>
     {% for bb in bbs %}
             <div style="margin-bottom: 20px; box-shadow: 3px 3px 15px black" class="card">
@@ -12,7 +12,7 @@
   {% if bb.image %}
     <img style="width: 150px" src="{{ bb.image.url }}" alt="">
         {% else %}
-        <p>Пользователь не добавил изображений</p>
+        <p>The user did not add any images</p>
     {% endif %}
       <p class="card-link"><span style="color: orangered;
             font-style: italic; font-size: 11px;">
@@ -20,12 +20,14 @@
     <p style="font-style: italic" class="card-text">{{ bb.content|truncatewords:10 }}</p>
       <hr>
       {% if bb.price %}
-      <p class="card-link">Цена {{ bb.price }} руб</p>
+      <p class="card-link">Price {{ bb.price }} rub</p>
       {% else %}
-      <p class="card-link">Цена 0 руб</p>
+      <p class="card-link">Price 0 rub</p>
       {% endif %}
       <hr>
-      <a style="box-shadow: 3px 3px 5px black" href="{{ bb.get_absolute_url }}" type="button" class="btn btn-primary">Подробнее</a>
+      <a style="box-shadow: 3px 3px 5px black"
+         href="{{ bb.get_absolute_url }}"
+         type="button" class="btn btn-primary">More detailed</a>
   </div>
 </div>
         {% endfor %}
