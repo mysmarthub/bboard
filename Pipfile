@@ -1,0 +1,21 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+django-crispy = "*"
+django-bootstrap4 = "*"
+easy-thumbnails = "*"
+django-cleanup = "*"
+django-simple-captcha = "*"
+djangorestframework = "*"
+django-cors-headers = "*"
+httpie = "*"
+Django = "*"
+Pillow = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.8"

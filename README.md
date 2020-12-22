@@ -9,6 +9,7 @@ Bulletin Board
 ---
 
 ![GitHub language count](https://img.shields.io/github/languages/count/mysmarthub/bboard)
+![GitHub Pipenv locked dependency version](https://img.shields.io/github/pipenv/locked/dependency-version/mysmarthub/bboard/django)
 ![GitHub repo size](https://img.shields.io/github/repo-size/mysmarthub/bboard)
 ![GitHub all releases](https://img.shields.io/github/downloads/mysmarthub/bboard/total)
 ![GitHub](https://img.shields.io/github/license/mysmarthub/bboard)
