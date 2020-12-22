@@ -58,6 +58,7 @@ Description:
 
 Help:
 ---
+    Don't forget to add settings.SECRET_KEY it to your private key
 
 `pip install -r requirements.txt`
 
