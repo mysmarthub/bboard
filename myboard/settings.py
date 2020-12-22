@@ -19,7 +19,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'k_vd+^r*slo#j+96)0esh#kscv&eo5ih-&&y!$yrau*2e7a+3o'
+SECRET_KEY = ''
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -137,9 +137,34 @@ THUMBNAIL_ALIASES = {
         },
     },
 }
-THUMBNAIL_BASEDIR = 'thumbnails'
-CRISPY_TEMPLATE_PACK = 'bootstrap4'
-AUTH_USER_MODEL = 'main.AdvUser'
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-CORS_ORIGIN_ALLOW_ALL = True
-CORS_URLS_REGEX = r'^/api/.*$'
+
+# THUMBNAIL_BASEDIR = 'thumbnails'
+# CRISPY_TEMPLATE_PACK = 'bootstrap4'
+# AUTH_USER_MODEL = 'main.AdvUser'
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# CORS_ORIGIN_ALLOW_ALL = True
+# CORS_URLS_REGEX = r'^/api/.*$'
+
+# mail.ru
+# EMAIL_HOST = 'smtp.mail.ru'
+# EMAIL_PORT = 2525
+# EMAIL_HOST_USER = "your@mail.ru"
+# EMAIL_HOST_PASSWORD = "password"
+# EMAIL_USE_TLS = True
+
+# gmail.com
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_PORT = 587
+# EMAIL_HOST_USER = "your@gmail.com"
+# EMAIL_HOST_PASSWORD = "password"
+# EMAIL_USE_TLS = True
+
+# yandex.ru
+# EMAIL_HOST = 'smtp.yandex.ru'
+# EMAIL_PORT = 465
+# EMAIL_HOST_USER = "your@yandex.ru"
+# EMAIL_HOST_PASSWORD = "password"
+# EMAIL_USE_SSL = True
+
+# SERVER_EMAIL = EMAIL_HOST_USER
+# DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
