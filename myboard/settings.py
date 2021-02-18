@@ -138,12 +138,12 @@ THUMBNAIL_ALIASES = {
     },
 }
 
-# THUMBNAIL_BASEDIR = 'thumbnails'
-# CRISPY_TEMPLATE_PACK = 'bootstrap4'
-# AUTH_USER_MODEL = 'main.AdvUser'
-# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-# CORS_ORIGIN_ALLOW_ALL = True
-# CORS_URLS_REGEX = r'^/api/.*$'
+THUMBNAIL_BASEDIR = 'thumbnails'
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+AUTH_USER_MODEL = 'main.AdvUser'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_URLS_REGEX = r'^/api/.*$'
 
 # mail.ru
 # EMAIL_HOST = 'smtp.mail.ru'

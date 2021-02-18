@@ -69,9 +69,13 @@ Help:
 
 `python manage.py createsuperuser`
 
-`python manage.py loaddata fixtures/rubric.main.json --app main.models`
+`python manage.py runserver`
 
-`python manage.py dumpdata --format=json main > fixtures/main.json`
+Open:
+----
+`http://127.0.0.1:8000/`
+
+`http://127.0.0.1:8000/admin`
 
 >API:
 ---
@@ -95,6 +99,6 @@ SOFTWARE.
 
 Support:
 ---
-    Email: myhackband@yandex.ru
+    Email: mysmarthub@yandex.ru
     Copyright © 2020 Aleksandr Suvorov
 
