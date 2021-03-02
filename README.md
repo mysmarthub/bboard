@@ -10,14 +10,12 @@ Bulletin Board
 
 ![GitHub language count](https://img.shields.io/github/languages/count/mysmarthub/bboard)
 ![GitHub Pipenv locked dependency version](https://img.shields.io/github/pipenv/locked/dependency-version/mysmarthub/bboard/django)
-![GitHub repo size](https://img.shields.io/github/repo-size/mysmarthub/bboard)
-![GitHub all releases](https://img.shields.io/github/downloads/mysmarthub/bboard/total)
 ![GitHub](https://img.shields.io/github/license/mysmarthub/bboard)
 ![GitHub Repo stars](https://img.shields.io/github/stars/mysmarthub/bboard?style=social)
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/mysmarthub/bboard)
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/django)
-![GitHub commit activity](https://img.shields.io/github/commit-activity/m/mysmarthub/bboard)
-
+[![Donate](https://img.shields.io/static/v1?label=donate&message=paypal&color=green)](https://paypal.me/myhackband)
+[![Donate](https://img.shields.io/static/v1?label=donate&message=yandex&color=yellow)](https://yoomoney.ru/to/4100115206129186)
 ---
 
 Help the project financially:
@@ -25,9 +23,7 @@ Help the project financially:
 >Yandex Money:
 https://yoomoney.ru/to/4100115206129186
 
-    Visa:    4048 4150 0400 5852
-
-    Sberbank Russia: 4276 4417 5763 7686
+    Visa:    4048 0250 0089 5923
 
 https://paypal.me/myhackband
 
