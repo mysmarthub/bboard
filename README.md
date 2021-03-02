@@ -97,4 +97,3 @@ Support:
 ---
     Email: mysmarthub@yandex.ru
     Copyright © 2020 Aleksandr Suvorov
-
